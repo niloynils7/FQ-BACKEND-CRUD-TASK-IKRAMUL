@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 const listRouter = require('./routes/listRoutes');
+const userRouter = require('./routes/userRoute');
 const app = express();
 
 // Development logging
@@ -14,6 +15,7 @@ app.use(express.json());
 
 // Routes
 app.use('/api/todolist', listRouter);
+app.use('/api/user', userRouter);
 
 // for all unhandled error
 app.all('*', (req, res, next) => {
