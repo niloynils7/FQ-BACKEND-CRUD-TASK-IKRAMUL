@@ -3,6 +3,7 @@ const morgan = require('morgan');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
+const listRouter = require('./routes/listRoutes');
 const app = express();
 
 // Development logging
@@ -18,10 +19,10 @@ app.use((req, res, next) => {
 });
 
 // Routes
-//app.use('api/todolist');
+app.use('/api/todolist', listRouter);
 
 // for all unhandled error
-app.use('*', (req, res, next) => {
+app.all('*', (req, res, next) => {
   next(new AppError(`can't find ${req.originalUrl}`, 404));
 });
 
